@@ -2,13 +2,13 @@
     <h1>Login Details</h1>
     <div>
         <label for="username">Username:</label>
-        <input id="username" type="text" placeholder="Enter User Name" />
+        <input #username id="username" type="text" placeholder="Enter User Name" />
     </div>
     <div>
         <label for="password">Password:</label>
-        <input id="password" type="text" placeholder="Enter Password" />
+        <input #password id="password" type="text" placeholder="Enter Password" />
     </div>
     <div>
-        <button type="button" (click)="login()">Submit</button>
+        <button type="button" (click)="login(username.value,password.value)">Submit</button>
     </div>
 </div>
