@@ -7,6 +7,7 @@ import { ProfileService } from './services/profile.service';
 import { LoginService } from './services/login.service';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,9 @@ import { AdminProfileComponent } from './components/admin-profile/admin-profile.
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [ProfileService, LoginService],
   bootstrap: [AppComponent]
