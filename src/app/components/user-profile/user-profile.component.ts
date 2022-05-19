@@ -1,8 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs';
+import { Skill } from 'src/app/models/skill';
 import { ProfileService } from 'src/app/services/profile.service';
+import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
+
+const SKILLS_DATA: Skill[] = [
+  {id: '', name: 'HTML', rating: '18'},
+  {id: '', name: 'CSS', rating: '15'},
+  {id: '', name: 'ANGULAR', rating:'20'},
+  {id: '', name: 'AWS', rating:'18'}
+];
 
 @Component({
   selector: 'app-user-profile',
@@ -16,7 +26,8 @@ export class UserProfileComponent implements OnInit {
     email: new FormControl(''),
     mobile: new FormControl(''),
   });
-
+  displayedColumns: string[] = ['name', 'rating', 'action'];
+  dataSource = SKILLS_DATA;
   submitted = false;
   isAddMode: boolean | undefined;
   loading = false;
@@ -26,6 +37,7 @@ export class UserProfileComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private profileService: ProfileService,
+        public dialog: MatDialog
   ) { }  
 
   ngOnInit(): void {
@@ -69,5 +81,13 @@ export class UserProfileComponent implements OnInit {
   }
   updateUser() {
     throw new Error('Method not implemented.');
+  }
+
+  openDialog(action: any, obj: any) {
+    obj.action = action;
+    const dialogRef = this.dialog.open(DialogBoxComponent, {
+      width: '250px',
+      data:obj
+    });
   }
 }

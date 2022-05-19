@@ -8,19 +8,34 @@ import { LoginService } from './services/login.service';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     UserProfileComponent,
-    AdminProfileComponent
+    AdminProfileComponent,
+    DialogBoxComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatInputModule
   ],
   providers: [ProfileService, LoginService],
   bootstrap: [AppComponent]
