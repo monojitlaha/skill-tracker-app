@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
+import { GridComponentComponent } from './components/grid-component/grid-component.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DialogBoxComponent } from './components/dialog-box/dialog-box.component
     LoginComponent,
     UserProfileComponent,
     AdminProfileComponent,
-    DialogBoxComponent
+    DialogBoxComponent,
+    GridComponentComponent
   ],
   imports: [
     BrowserModule,

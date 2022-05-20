@@ -1,5 +1,4 @@
-export class Skill { 
-    public id: string;
+export class Skill {
     public name: string; 
     public rating:string;
 } 

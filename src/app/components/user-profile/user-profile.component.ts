@@ -1,17 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs';
 import { Skill } from 'src/app/models/skill';
 import { ProfileService } from 'src/app/services/profile.service';
-import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
+import { GridComponentComponent } from '../grid-component/grid-component.component';
 
 const SKILLS_DATA: Skill[] = [
-  {id: '', name: 'HTML', rating: '18'},
-  {id: '', name: 'CSS', rating: '15'},
-  {id: '', name: 'ANGULAR', rating:'20'},
-  {id: '', name: 'AWS', rating:'18'}
+  {name: 'HTML', rating: '18'},
+  {name: 'CSS', rating: '15'},
+  {name: 'ANGULAR', rating:'20'},
+  {name: 'AWS', rating:'18'}
 ];
 
 @Component({
@@ -31,13 +30,13 @@ export class UserProfileComponent implements OnInit {
   submitted = false;
   isAddMode: boolean | undefined;
   loading = false;
+  @ViewChild('gridComp',{static:true}) gridComp: GridComponentComponent;
 
   constructor(
     private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private profileService: ProfileService,
-        public dialog: MatDialog
+        private profileService: ProfileService        
   ) { }  
 
   ngOnInit(): void {
@@ -82,12 +81,30 @@ export class UserProfileComponent implements OnInit {
   updateUser() {
     throw new Error('Method not implemented.');
   }
+  
+  dialogEventHandler(result: any) {
+    if(result.event == 'Add'){
+      this.addRowData(result.data);
+    }else if(result.event == 'Update'){
+      this.updateRowData(result.data);
+    }
+  }
 
-  openDialog(action: any, obj: any) {
-    obj.action = action;
-    const dialogRef = this.dialog.open(DialogBoxComponent, {
-      width: '250px',
-      data:obj
+  addRowData(row_obj: any): void{
+    var d = new Date();
+    this.dataSource.push({
+      name:row_obj.name,
+      rating:row_obj.rating
+    });
+    this.gridComp.table.renderRows();
+    
+  }
+  updateRowData(row_obj: any){
+    this.dataSource = this.dataSource.filter((value,key)=>{
+      if(value.name == row_obj.name){
+        value.rating = row_obj.rating;
+      }
+      return true;
     });
   }
 }
