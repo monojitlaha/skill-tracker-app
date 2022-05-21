@@ -35,9 +35,9 @@ export class LoginComponent implements OnInit {
       );
 
     if (this.token != null) {
-      console.log("Component Token =" + this.token);
+      console.log("Component Token =" + this.token.token);
+      localStorage.setItem('token', this.token.token);
       this.router.navigate(['/userprofile'], { queryParams: { userName: username } });
-
     }
     
     // setTimeout(() => {

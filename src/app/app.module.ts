@@ -16,9 +16,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
 import { GridComponentComponent } from './components/grid-component/grid-component.component';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
     HttpClientModule
   ],
-  providers: [ProfileService, LoginService],
+  providers: [ProfileService, LoginService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true } ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

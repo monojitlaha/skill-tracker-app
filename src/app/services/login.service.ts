@@ -10,15 +10,13 @@ import { environment } from '../../environments/environment';
 })
 
 export class LoginService {
-  token: string = "";
   constructor(private http: HttpClient) { }
 
   login(logincreds: LoginCreds): Observable<any> {
     return this.http.post(environment.authApiUrl + 'api/Authentication', logincreds, { responseType: 'text' })
-      .pipe(map(token => {
-        console.log('Token in Service = ' + token);
-        localStorage.setItem('token', token);
-        return token;
+      .pipe(map(result => {
+        console.log('Auth Data:' + result);
+        return result;
       }));
   }
 }

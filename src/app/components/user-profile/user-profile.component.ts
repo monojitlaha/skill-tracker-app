@@ -2,10 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs';
-import { Profile } from 'src/app/models/Profile';
-import { Skill } from 'src/app/models/skill';
-import { AlertService } from 'src/app/services/alert.service';
-import { ProfileService } from 'src/app/services/profile.service';
+import { Profile } from '../../models/profile';
+import { Skill } from '../../models/skill';
+import { AlertService } from '../../services/alert.service';
+import { ProfileService } from '../../services/profile.service';
 import { GridComponentComponent } from '../grid-component/grid-component.component';
 
 const SKILLS_DATA: Skill[] = [
@@ -109,6 +109,7 @@ export class UserProfileComponent implements OnInit {
 
   createUser() {
     this.proflie.name = this.f['name'].value;
+    this.proflie.userName = this.username;
     this.proflie.associateId = this.f['associateId'].value;
     this.proflie.email = this.f['email'].value;
     this.proflie.mobile = this.f['mobile'].value;
@@ -150,14 +151,14 @@ export class UserProfileComponent implements OnInit {
 
   addRowData(row_obj: any, dataSource: Skill[]): void {
     dataSource.push({
-      name: row_obj.name,
+      description: row_obj.description,
       rating: row_obj.rating
     });
   }
 
   updateRowData(row_obj: any, dataSource: Skill[]) {
     dataSource = dataSource.filter((value, key) => {
-      if (value.name == row_obj.name) {
+      if (value.description == row_obj.description) {
         value.rating = row_obj.rating;
       }
       return true;
