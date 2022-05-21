@@ -39,22 +39,22 @@ export class DialogBoxComponent implements OnInit {
   ngOnInit(): void {
     if (this.gridType === 'Technical') {
       this.skills = [
-        { value: 'Html', viewValue: 'HTML-CSS-JAVASCRIPT' },
-        { value: 'Angular', viewValue: 'ANGULAR' },
-        { value: 'React', viewValue: 'REACT' },
-        { value: 'Spring', viewValue: 'SPRING' },
-        { value: 'Restful', viewValue: 'RESTFUL' },
-        { value: 'Hiobernate', viewValue: 'HIBERNATE' },
-        { value: 'Git', viewValue: 'GIT' },
-        { value: 'Docker', viewValue: 'DOCKER' },
-        { value: 'Jenkins', viewValue: 'JENKINS' },
-        { value: 'Aws', viewValue: 'AWS' }
+        { value: 'HTML-CSS-JAVASCRIPT', viewValue: 'HTML-CSS-JAVASCRIPT' },
+        { value: 'ANGULAR', viewValue: 'ANGULAR' },
+        { value: 'REACT', viewValue: 'REACT' },
+        { value: 'SPRING', viewValue: 'SPRING' },
+        { value: 'RESTFUL', viewValue: 'RESTFUL' },
+        { value: 'HIBERNATE', viewValue: 'HIBERNATE' },
+        { value: 'GIT', viewValue: 'GIT' },
+        { value: 'DOCKER', viewValue: 'DOCKER' },
+        { value: 'JENKINS', viewValue: 'JENKINS' },
+        { value: 'AWS', viewValue: 'AWS' }
       ];
     } else {
       this.skills = [
-        { value: 'Spoken', viewValue: 'SPOKEN' },
-        { value: 'Communication', viewValue: 'COMMUNICATION' },
-        { value: 'Aptitude', viewValue: 'APTITUDE' },
+        { value: 'SPOKEN', viewValue: 'SPOKEN' },
+        { value: 'COMMUNICATION', viewValue: 'COMMUNICATION' },
+        { value: 'APTITUDE', viewValue: 'APTITUDE' },
       ];
     }
     this.ratings = [

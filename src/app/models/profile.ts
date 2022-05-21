@@ -1,6 +1,7 @@
 import { Skill } from "./skill";
 
-export interface Profile {
+export class Profile {
+    id: string;
     name: string; 
     associateId:string;
     email: string;
