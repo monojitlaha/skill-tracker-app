@@ -62,6 +62,20 @@ export class UserProfileComponent implements OnInit {
       mobile: ['', [Validators.required, Validators.minLength(10),
       Validators.maxLength(10)]]
     });
+    this.profileService.getProfile(this.username).subscribe((result) => {
+      if(result && result[0]) {
+        this.proflie = result[0];
+        this.isAddMode = false;
+        this.form.patchValue({
+          name: this.proflie.name,
+          associateId: this.proflie.associateId,
+          email: this.proflie.email,
+          mobile: this.proflie.mobile
+        });
+        this.technicalSkills = this.proflie.technicalSkills;
+        this.communicationSkills = this.proflie.communicationSkills;      
+      }
+    });
   }
 
   // convenience getter for easy access to form fields

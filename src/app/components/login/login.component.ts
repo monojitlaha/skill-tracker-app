@@ -10,7 +10,7 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class LoginComponent implements OnInit {
   loginCreds: any;
-  token: any = "";
+  authData: any;
   constructor(private router: Router, private loginService: LoginService) {
   }
 
@@ -23,25 +23,15 @@ export class LoginComponent implements OnInit {
     this.loginCreds = new LoginCreds(username, password);
     console.log(this.loginCreds);
 
-    this.token = this.loginService.login(this.loginCreds)
-      .subscribe(
+    this.loginService.login(this.loginCreds)
+      .subscribe((data) =>
         {
-          next() { console.log('Success'); },
-          error() { console.log('Error Occured'); },
-          complete() {
-            console.log('Finished sequence');
+          if (data) {
+            this.authData = data;
+            console.log("Component Token =" + this.authData);
+            localStorage.setItem('token', this.authData);
+            this.router.navigate(['/userprofile'], { queryParams: { userName: username } });
           }
-        }
-      );
-
-    if (this.token != null) {
-      console.log("Component Token =" + this.token.token);
-      localStorage.setItem('token', this.token.token);
-      this.router.navigate(['/userprofile'], { queryParams: { userName: username } });
-    }
-    
-    // setTimeout(() => {
-    //   this.router.navigate(['/profile']);
-    // }, 1000);
+        });
   }
 }

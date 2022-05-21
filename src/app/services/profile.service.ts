@@ -13,6 +13,11 @@ const httpOptions = {
 })
 export class ProfileService {
   constructor(private http: HttpClient) { }
+
+  getProfile(username:string): Observable<any> {
+    return this.http.get(environment.baseApiUrl + 'admin/profile/search/username/' + username, httpOptions);
+  }
+
   createProfile(profile:Profile): Observable<any> {
     const body=JSON.stringify(profile);
     console.log(body)
