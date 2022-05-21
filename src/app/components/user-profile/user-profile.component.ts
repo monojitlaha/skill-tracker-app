@@ -93,7 +93,14 @@ export class UserProfileComponent implements OnInit {
         return;
       }
 
-      this.loading = true;
+      this.proflie.name = this.f['name'].value;
+      this.proflie.userName = this.username;
+      this.proflie.associateId = this.f['associateId'].value;
+      this.proflie.email = this.f['email'].value;
+      this.proflie.mobile = this.f['mobile'].value;
+      this.proflie.technicalSkills = this.technicalSkills;
+      this.proflie.communicationSkills = this.communicationSkills;
+
       if (this.isAddMode) {
         this.createUser();
       } else {
@@ -107,17 +114,12 @@ export class UserProfileComponent implements OnInit {
     this.form.reset();
   }
 
-  createUser() {
-    this.proflie.name = this.f['name'].value;
-    this.proflie.userName = this.username;
-    this.proflie.associateId = this.f['associateId'].value;
-    this.proflie.email = this.f['email'].value;
-    this.proflie.mobile = this.f['mobile'].value;
-    this.proflie.technicalSkills = this.technicalSkills;
-    this.proflie.communicationSkills = this.communicationSkills;
+  createUser() {    
     this.profileService.createProfile(this.proflie)
       .subscribe(
         data => {
+          this.proflie = data;
+          this.isAddMode = false;
           this.alertService.success('Profile added successfully', { keepAfterRouteChange: true });
         },
         error => {
@@ -125,8 +127,17 @@ export class UserProfileComponent implements OnInit {
           this.loading = false;
         });
   }
+
   updateUser() {
-    throw new Error('Method not implemented.');
+    this.profileService.updateProfile(this.proflie.id, this.proflie)
+      .subscribe(
+        data => {
+          this.alertService.success('Profile updated successfully', { keepAfterRouteChange: true });
+        },
+        error => {
+          this.alertService.error(error);
+          this.loading = false;
+        });
   }
 
   techGridEventHandler(result: any) {
@@ -136,6 +147,9 @@ export class UserProfileComponent implements OnInit {
       this.techGridComp.table.renderRows();
     } else if (result.event == 'Update') {
       this.updateRowData(result.data, this.technicalSkills);
+    } else if(result.event == 'Delete'){
+      this.deleteRowData(result.data, this.technicalSkills);
+      this.techGridComp.table.renderRows();
     }
   }
 
@@ -146,6 +160,8 @@ export class UserProfileComponent implements OnInit {
       this.commGridComp.table.renderRows();
     } else if (result.event == 'Update') {
       this.updateRowData(result.data, this.communicationSkills);
+    } else if(result.event == 'Delete'){
+      this.deleteRowData(result.data, this.communicationSkills);
     }
   }
 
@@ -162,6 +178,12 @@ export class UserProfileComponent implements OnInit {
         value.rating = row_obj.rating;
       }
       return true;
+    });
+  }
+
+  deleteRowData(row_obj: any, dataSource: Skill[]) {
+    dataSource = dataSource.filter((value,key)=>{
+      return value.description != row_obj.description;
     });
   }
 }
