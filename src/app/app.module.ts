@@ -20,6 +20,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { AlertComponent } from './components/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
     UserProfileComponent,
     AdminProfileComponent,
     DialogBoxComponent,
-    GridComponentComponent
+    GridComponentComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,

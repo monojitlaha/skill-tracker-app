@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 import { Profile } from '../../models/profile';
 import { Skill } from '../../models/skill';
 import { AlertService } from '../../services/alert.service';
@@ -85,6 +84,8 @@ export class UserProfileComponent implements OnInit {
 
   onSubmit(): void {
     this.submitted = true;
+
+    this.alertService.clear();
 
     // stop here if form is invalid
     if (this.form.invalid) {
