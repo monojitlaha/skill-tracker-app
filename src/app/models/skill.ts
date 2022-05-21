@@ -1,4 +1,4 @@
-export class Skill {
-    public name: string; 
-    public rating:string;
+export interface Skill {
+    name: string; 
+    rating:string;
 } 

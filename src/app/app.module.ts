@@ -17,6 +17,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
 import { GridComponentComponent } from './components/grid-component/grid-component.component';
 import { HttpClientModule} from '@angular/common/http';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { HttpClientModule} from '@angular/common/http';
     MatInputModule,
     MatButtonModule,
     MatInputModule,
+    MatOptionModule,
+    MatSelectModule,
     HttpClientModule
   ],
   providers: [ProfileService, LoginService],

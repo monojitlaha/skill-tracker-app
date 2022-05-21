@@ -11,6 +11,7 @@ import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 export class GridComponentComponent implements OnInit {
   @Input() displayedColumns: string[];
   @Input() dataSource: any;
+  @Input() gridType: any;
   @Output() afterCloseEvent: EventEmitter<any> = new EventEmitter();
   @ViewChild(MatTable,{static:true}) table: MatTable<any>;
   
@@ -25,6 +26,7 @@ export class GridComponentComponent implements OnInit {
       width: '250px',
       data:obj
     });
+    dialogRef.componentInstance.gridType = this.gridType;
 
     dialogRef.afterClosed().subscribe(result => {
       this.afterCloseEvent.emit(result);
