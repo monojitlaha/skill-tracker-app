@@ -10,42 +10,36 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class LoginComponent implements OnInit {
   loginCreds: any;
-  token:any = "";
-  constructor(private router: Router, private loginService: LoginService) { 
-
-
+  token: any = "";
+  constructor(private router: Router, private loginService: LoginService) {
   }
 
   ngOnInit(): void {
   }
 
-  login(username: string, password: string):void {
-    
-    console.log("Username =" + username + ";" + "Password ="+ password);
-    this.loginCreds = new LoginCreds(username, password);
-    console.log(this.loginCreds); 
-    
-    this.token = this.loginService.login(this.loginCreds)    
-    .subscribe( 
-      {
-        next() { console.log('Success'); },
-        error(){console.log('Error Occured');},
-        complete() { 
-          console.log('Finished sequence');           
-        }
-      }       
-      );
-    
-    
-      
-      if(this.token!=null)
-      {
-        console.log("Component Token ="+ this.token);
-        this.router.navigate(['/userprofile']);
-        
-      }
-        
+  login(username: string, password: string): void {
 
+    console.log("Username =" + username + ";" + "Password =" + password);
+    this.loginCreds = new LoginCreds(username, password);
+    console.log(this.loginCreds);
+
+    this.token = this.loginService.login(this.loginCreds)
+      .subscribe(
+        {
+          next() { console.log('Success'); },
+          error() { console.log('Error Occured'); },
+          complete() {
+            console.log('Finished sequence');
+          }
+        }
+      );
+
+    if (this.token != null) {
+      console.log("Component Token =" + this.token);
+      this.router.navigate(['/userprofile'], { queryParams: { userName: username } });
+
+    }
+    
     // setTimeout(() => {
     //   this.router.navigate(['/profile']);
     // }, 1000);

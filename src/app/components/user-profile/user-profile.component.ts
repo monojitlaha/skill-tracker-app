@@ -29,6 +29,7 @@ export class UserProfileComponent implements OnInit {
   technicalSkills = SKILLS_DATA;
   communicationSkills = COMM_DATA;
   submitted = false;
+  username: string;
   isAddMode: boolean | undefined;
   loading = false;
   @ViewChild('techGridComp', { static: true }) techGridComp: GridComponentComponent;
@@ -40,7 +41,13 @@ export class UserProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private profileService: ProfileService
-  ) { }
+  ) { 
+    this.route.queryParamMap
+      .subscribe(params => {
+        this.username = params.get('userName') || '';
+        console.log('Username:' + this.username);
+      });
+  }
 
   ngOnInit(): void {
     this.isAddMode = true;
@@ -104,14 +111,14 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-  addRowData(row_obj: any, dataSource:Skill[]): void {
+  addRowData(row_obj: any, dataSource: Skill[]): void {
     dataSource.push({
       name: row_obj.name,
       rating: row_obj.rating
-    });  
+    });
   }
 
-  updateRowData(row_obj: any, dataSource:Skill[]) {
+  updateRowData(row_obj: any, dataSource: Skill[]) {
     dataSource = dataSource.filter((value, key) => {
       if (value.name == row_obj.name) {
         value.rating = row_obj.rating;
