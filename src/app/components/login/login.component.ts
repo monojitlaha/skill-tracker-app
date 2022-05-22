@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginCreds } from 'src/app/models/login-creds';
+import { LoginCreds } from 'src/app/models/logincreds';
+import { LoginProfile } from 'src/app/models/login-profile';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class LoginComponent implements OnInit {
   loginCreds: any;
-  authData: any;
+  authData: LoginProfile;
   constructor(private router: Router, private loginService: LoginService) {
   }
 
@@ -29,7 +30,8 @@ export class LoginComponent implements OnInit {
           if (data) {
             this.authData = data;
             console.log("Component Token =" + this.authData);
-            localStorage.setItem('token', this.authData);
+            localStorage.setItem('token', this.authData.token);
+            localStorage.setItem('role', this.authData.role);
             this.router.navigate(['/userprofile'], { queryParams: { userName: username } });
           }
         });
