@@ -12,6 +12,7 @@ export class GridComponentComponent implements OnInit {
   @Input() displayedColumns: string[];
   @Input() dataSource: any;
   @Input() gridType: any;
+  @Input() isButtonsVisible: boolean;
   @Output() afterCloseEvent: EventEmitter<any> = new EventEmitter();
   @ViewChild(MatTable,{static:true}) table: MatTable<any>;
   

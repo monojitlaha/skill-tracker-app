@@ -55,7 +55,7 @@ export class UserProfileComponent implements OnInit {
       mobile: ['', [Validators.required, Validators.minLength(10),
       Validators.maxLength(10)]]
     });
-    this.profileService.getProfile(this.username).subscribe((result) => {
+    this.profileService.getProfileByCriteria('username', this.username).subscribe((result) => {
       if (result && result[0]) {
         this.proflie = result[0];
         this.isAddMode = false;
