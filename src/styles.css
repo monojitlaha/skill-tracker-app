@@ -3,7 +3,23 @@
 body {
     width: 80%!important;
     padding-left: 300px!important;
+    display: flex;
+    flex-direction: row;
 }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-table {
+    margin-bottom: 10px;
+    width: 800px;
+    margin-top: 10px;
+}
+
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+    width: 30%;
+}
+
+.mat-flat-button.mat-primary {
+    margin-bottom: 5px;
+}

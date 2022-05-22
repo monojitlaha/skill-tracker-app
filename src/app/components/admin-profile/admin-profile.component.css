@@ -1,0 +1,21 @@
+.label-cls {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.text-cls {
+    font-size: 16px;
+    padding-left: 5px;
+}
+
+.profile-div {
+    border-style: outset;
+    outline: 2px;
+    border-width: 0.1pt;
+    margin:15px;
+    padding: 5px;
+}
+
+.div-content {
+    padding: 5px;
+}

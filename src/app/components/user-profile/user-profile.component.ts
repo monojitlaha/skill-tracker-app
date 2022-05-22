@@ -56,6 +56,10 @@ export class UserProfileComponent implements OnInit {
       mobile: ['', [Validators.required, Validators.minLength(10),
       Validators.maxLength(10)]]
     });
+    this.getProfile();
+  }
+
+  getProfile() {
     this.profileService.getProfileByCriteria('username', this.username).subscribe((result) => {
       if (result && result[0]) {
         this.proflie = result[0];
@@ -126,6 +130,7 @@ export class UserProfileComponent implements OnInit {
     this.technicalSkills = [];
     this.communicationSkills = [];
     this.form.reset();
+    this.getProfile();
   }
 
   createUser() {

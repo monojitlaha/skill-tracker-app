@@ -15,10 +15,16 @@ export class GridComponentComponent implements OnInit {
   @Input() isButtonsVisible: boolean;
   @Output() afterCloseEvent: EventEmitter<any> = new EventEmitter();
   @ViewChild(MatTable,{static:true}) table: MatTable<any>;
+  buttonDesc:string;
   
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    if(this.gridType === 'Technical') {
+      this.buttonDesc = "Add Technical Skills"
+    } else {
+      this.buttonDesc = "Add Communication Skills"
+    }
   }
 
   openDialog(action: any, obj: any) {

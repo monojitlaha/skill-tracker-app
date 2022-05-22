@@ -32,34 +32,34 @@
         </button>
     </div>
 </form>
-<div *ngFor="let profile of profiles">
-    <div class="form-group">
+<div class="profile-div" *ngFor="let profile of profiles">
+    <div class="div-content">
         <div>
-            <label for="name">Name:</label>
-            <input type="text" class="form-control" [(ngModel)]="profile.name" [readonly]="true" />
+            <span class="label-cls">Name:</span>
+            <span class="text-cls">{{profile.name}}</span>
         </div>
         <div>
-            <label for="associateId">Associate Id:</label>
-            <input type="text" class="form-control" [(ngModel)]="profile.associateId" [readonly]="true" />
+            <span class="label-cls">Associate Id:</span>
+            <span class="text-cls">{{profile.associateId}}</span>
         </div>
         <div>
-            <label for="email">Email:</label>
-            <input type="text" class="form-control" [(ngModel)]="profile.email" [readonly]="true" />
+            <span class="label-cls">Email:</span>
+            <span class="text-cls">{{profile.email}}</span>
         </div>
         <div>
-            <label for="mobile">Mobile:</label>
-            <input type="text" class="form-control" [(ngModel)]="profile.mobile" [readonly]="true" />
+            <span class="label-cls">Mobile:</span>
+            <span class="text-cls">{{profile.mobile}}</span>
         </div>
     </div>
-    <div class="form-group">
-        <div class="form-group col">
+    <div class="div-content">
+        <div>
             <app-grid-component #techGridComp [displayedColumns]="displayedColumns"
-                [dataSource]="profile.technicalSkills" [gridType]="'Technical'"
+                [dataSource]="profile.technicalSkills" [gridType]="''"
                 (afterCloseEvent)="techGridEventHandler($event)" [isButtonsVisible]="false"></app-grid-component>
         </div>
-        <div class="form-group col">
+        <div>
             <app-grid-component #commGridComp [displayedColumns]="displayedColumns"
-                [dataSource]="profile.communicationSkills" [gridType]="'Communication'"
+                [dataSource]="profile.communicationSkills" [gridType]="''"
                 (afterCloseEvent)="commGridEventHandler($event)" [isButtonsVisible]="false"></app-grid-component>
         </div>
     </div>
