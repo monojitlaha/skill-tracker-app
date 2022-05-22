@@ -6,6 +6,7 @@ import { Skill } from '../../models/skill';
 import { AlertService } from '../../services/alert.service';
 import { ProfileService } from '../../services/profile.service';
 import { GridComponentComponent } from '../grid-component/grid-component.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-profile',
@@ -134,10 +135,12 @@ export class UserProfileComponent implements OnInit {
           this.proflie = data;
           this.isAddMode = false;
           this.alertService.success('Profile added successfully', { keepAfterRouteChange: true });
+          Swal.fire('YaaaY!', 'Profile added successfully!!!', 'success');
         },
         error => {
           this.alertService.error(error);
           this.loading = false;
+          Swal.fire('Yikes!', 'Something went wrong!', 'error');
         });
   }
 
@@ -146,10 +149,12 @@ export class UserProfileComponent implements OnInit {
       .subscribe(
         data => {
           this.alertService.success('Profile updated successfully', { keepAfterRouteChange: true });
+          Swal.fire('YaaaY!', 'Profile updated successfully!!!', 'success');
         },
         error => {
           this.alertService.error(error);
           this.loading = false;
+          Swal.fire('Yikes!', 'Something went wrong!', 'error');
         });
   }
 
