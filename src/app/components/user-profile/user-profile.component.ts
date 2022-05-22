@@ -7,12 +7,6 @@ import { AlertService } from '../../services/alert.service';
 import { ProfileService } from '../../services/profile.service';
 import { GridComponentComponent } from '../grid-component/grid-component.component';
 
-const SKILLS_DATA: Skill[] = [
-];
-
-const COMM_DATA: Skill[] = [
-];
-
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -26,17 +20,17 @@ export class UserProfileComponent implements OnInit {
     mobile: new FormControl(''),
   });
   displayedColumns: string[] = ['name', 'rating', 'action'];
-  technicalSkills = SKILLS_DATA;
-  communicationSkills = COMM_DATA;
+  technicalSkills: Skill[] = [];
+  communicationSkills: Skill[] = [];
   submitted = false;
   username: string;
   isAddMode: boolean | undefined;
   loading = false;
   isTechnicalSkillsValid = true;
   isCommunicationSkillsValid = true;
+  proflie: Profile;
   @ViewChild('techGridComp', { static: true }) techGridComp: GridComponentComponent;
   @ViewChild('commGridComp', { static: true }) commGridComp: GridComponentComponent;
-  proflie: Profile;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -62,7 +56,7 @@ export class UserProfileComponent implements OnInit {
       Validators.maxLength(10)]]
     });
     this.profileService.getProfile(this.username).subscribe((result) => {
-      if(result && result[0]) {
+      if (result && result[0]) {
         this.proflie = result[0];
         this.isAddMode = false;
         this.form.patchValue({
@@ -72,7 +66,7 @@ export class UserProfileComponent implements OnInit {
           mobile: this.proflie.mobile
         });
         this.technicalSkills = this.proflie.technicalSkills;
-        this.communicationSkills = this.proflie.communicationSkills;      
+        this.communicationSkills = this.proflie.communicationSkills;
       }
     });
   }
@@ -102,9 +96,9 @@ export class UserProfileComponent implements OnInit {
         this.isCommunicationSkillsValid = false;
       } else {
         this.isCommunicationSkillsValid = true;
-      } 
-      
-      if(!this.isCommunicationSkillsValid || !this.isTechnicalSkillsValid) {
+      }
+
+      if (!this.isCommunicationSkillsValid || !this.isTechnicalSkillsValid) {
         return;
       }
 
@@ -121,15 +115,19 @@ export class UserProfileComponent implements OnInit {
       } else {
         this.updateUser();
       }
-    }, 1000);     
+    }, 1000);
   }
 
   onReset(): void {
     this.submitted = false;
+    this.isCommunicationSkillsValid = true;
+    this.isTechnicalSkillsValid = true;
+    this.technicalSkills = [];
+    this.communicationSkills = [];
     this.form.reset();
   }
 
-  createUser() {    
+  createUser() {
     this.profileService.createProfile(this.proflie)
       .subscribe(
         data => {
@@ -162,9 +160,8 @@ export class UserProfileComponent implements OnInit {
       this.techGridComp.table.renderRows();
     } else if (result.event == 'Update') {
       this.updateRowData(result.data, this.technicalSkills);
-    } else if(result.event == 'Delete'){
-      this.deleteRowData(result.data, this.technicalSkills);
-      this.techGridComp.table.renderRows();
+    } else if (result.event == 'Delete') {
+      this.technicalSkills = this.deleteRowData(result.data, this.technicalSkills);
     }
   }
 
@@ -175,8 +172,8 @@ export class UserProfileComponent implements OnInit {
       this.commGridComp.table.renderRows();
     } else if (result.event == 'Update') {
       this.updateRowData(result.data, this.communicationSkills);
-    } else if(result.event == 'Delete'){
-      this.deleteRowData(result.data, this.communicationSkills);
+    } else if (result.event == 'Delete') {
+      this.communicationSkills = this.deleteRowData(result.data, this.communicationSkills);
     }
   }
 
@@ -189,16 +186,17 @@ export class UserProfileComponent implements OnInit {
 
   updateRowData(row_obj: any, dataSource: Skill[]) {
     dataSource = dataSource.filter((value, key) => {
-      if (value.description == row_obj.description) {
+      if (value.description === row_obj.description) {
         value.rating = row_obj.rating;
       }
       return true;
     });
   }
 
-  deleteRowData(row_obj: any, dataSource: Skill[]) {
-    dataSource = dataSource.filter((value,key)=>{
-      return value.description != row_obj.description;
+  deleteRowData(row_obj: any, dataSource: Skill[]): Skill[] {
+    dataSource = dataSource.filter((value, key) => {
+      return value.description !== row_obj.description;
     });
+    return dataSource;
   }
 }
