@@ -43,14 +43,16 @@
     <div class="form-group">
         <div class="form-group col">
             <app-grid-component #techGridComp [displayedColumns]="displayedColumns" [dataSource]="technicalSkills"
-                [gridType]="'Technical'" (afterCloseEvent)="techGridEventHandler($event)"></app-grid-component>
+                [gridType]="'Technical'" (afterCloseEvent)="techGridEventHandler($event)"
+                [isButtonsVisible]="true"></app-grid-component>
                 <div *ngIf="!isTechnicalSkillsValid" class="alert alert-danger">
                     <div>Please select atleast 1 Technical Skill</div>
                 </div>
         </div>
         <div class="form-group col">
             <app-grid-component #commGridComp [displayedColumns]="displayedColumns" [dataSource]="communicationSkills"
-                [gridType]="'Communication'" (afterCloseEvent)="commGridEventHandler($event)"></app-grid-component>
+                [gridType]="'Communication'" (afterCloseEvent)="commGridEventHandler($event)"
+                [isButtonsVisible]="true"></app-grid-component>
                 <div *ngIf="!isCommunicationSkillsValid" class="alert alert-danger">
                     <div>Please select atleast 1 Communication Skill</div>
                 </div>

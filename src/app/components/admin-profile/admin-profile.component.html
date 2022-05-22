@@ -1,1 +1,69 @@
-<p>admin-profile works!</p>
+<h1>Administration Dashboard</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+        <div class="form-group col">
+            <label for="searchby">Search By:</label>
+            <select type="text" formControlName="searchby" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['searchby'].errors }">
+                <option *ngFor="let criteria of searchCriterias" [value]="criteria.value">{{criteria.viewValue}}
+                </option>
+            </select>
+            <div *ngIf="f['searchby'].touched && f['searchby'].errors" class="alert alert-danger">
+                <div *ngIf="f['searchby'].errors['required']">Please Select Search Criteria</div>
+            </div>
+        </div>
+        <div class="form-group col">
+            <label for="searchvalue">Search Value:</label>
+            <input type="text" formControlName="searchvalue" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['searchvalue'].errors }" />
+            <div *ngIf="f['searchvalue'].touched && f['searchvalue'].errors" class="alert alert-danger">
+                <div *ngIf="f['searchvalue'].errors['required']">Please Enter Search Value</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" [disabled]="form.invalid" class="btn btn-primary">
+            <span *ngIf="form.invalid" class="spinner-border spinner-border-sm mr-1"></span>
+            Search
+        </button>
+        <button (click)="onReset()" class="btn btn-warning float-right">
+            <span class="spinner-border spinner-border-sm mr-1"></span>
+            Cancel
+        </button>
+    </div>
+</form>
+<div *ngFor="let profile of profiles">
+    <div class="form-group">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" [(ngModel)]="profile.name" [readonly]="true" />
+        </div>
+        <div>
+            <label for="associateId">Associate Id:</label>
+            <input type="text" class="form-control" [(ngModel)]="profile.associateId" [readonly]="true" />
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="text" class="form-control" [(ngModel)]="profile.email" [readonly]="true" />
+        </div>
+        <div>
+            <label for="mobile">Mobile:</label>
+            <input type="text" class="form-control" [(ngModel)]="profile.mobile" [readonly]="true" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-group col">
+            <app-grid-component #techGridComp [displayedColumns]="displayedColumns"
+                [dataSource]="profile.technicalSkills" [gridType]="'Technical'"
+                (afterCloseEvent)="techGridEventHandler($event)" [isButtonsVisible]="false"></app-grid-component>
+        </div>
+        <div class="form-group col">
+            <app-grid-component #commGridComp [displayedColumns]="displayedColumns"
+                [dataSource]="profile.communicationSkills" [gridType]="'Communication'"
+                (afterCloseEvent)="commGridEventHandler($event)" [isButtonsVisible]="false"></app-grid-component>
+        </div>
+    </div>
+</div>
+<div *ngIf="profiles == undefined || profiles.length == 0" class="alert alert-danger">
+    <div>No Recods Found</div>
+</div>

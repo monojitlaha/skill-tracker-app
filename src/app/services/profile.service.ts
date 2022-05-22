@@ -14,8 +14,12 @@ const httpOptions = {
 export class ProfileService {
   constructor(private http: HttpClient) { }
 
-  getProfile(username:string): Observable<any> {
-    return this.http.get(environment.baseApiUrl + 'admin/profile/search/username/' + username, httpOptions);
+  getProfiles(): Observable<any> {
+    return this.http.get(environment.baseApiUrl + 'admin/profile/search', httpOptions);
+  }
+
+  getProfileByCriteria(key:string, value:string): Observable<any> {
+    return this.http.get(environment.baseApiUrl + 'admin/profile/search/' + key +'/' + value, httpOptions);
   }
 
   createProfile(profile:Profile): Observable<any> {
