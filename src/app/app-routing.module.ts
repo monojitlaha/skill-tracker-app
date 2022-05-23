@@ -5,11 +5,11 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
 import { AuthenticationGuard } from './guards/authentication.guard';
 
-const routes: Routes = [
-  { path: '',  redirectTo: '/login', pathMatch: 'full' },
+const routes: Routes = [  
   { path: 'login', pathMatch: 'full', component: LoginComponent},
   { path: 'userprofile', pathMatch: 'full', component: UserProfileComponent, canActivate:[AuthenticationGuard]},
-  { path: 'adminprofile', pathMatch: 'full', component: AdminProfileComponent, canActivate:[AuthenticationGuard]}  
+  { path: 'adminprofile', pathMatch: 'full', component: AdminProfileComponent, canActivate:[AuthenticationGuard]},
+  { path: '**',  redirectTo: '/login', pathMatch: 'full' },  
 ];
 
 @NgModule({
