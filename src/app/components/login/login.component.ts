@@ -25,15 +25,19 @@ export class LoginComponent implements OnInit {
     console.log(this.loginCreds);
 
     this.loginService.login(this.loginCreds)
-      .subscribe((data) =>
-        {
-          if (data) {
-            this.authData = data;
-            console.log("Component Token =" + this.authData);
-            localStorage.setItem('token', this.authData.token);
-            localStorage.setItem('role', this.authData.role);
+      .subscribe((data) => {
+        if (data) {
+          this.authData = data;
+          console.log("Component Token =" + this.authData);
+          localStorage.setItem('token', this.authData.token);
+          localStorage.setItem('role', this.authData.role);
+          if (this.authData && this.authData.role
+              && this.authData.role.toLowerCase() === 'admin') {
+            this.router.navigate(['/adminprofile']);
+          } else {
             this.router.navigate(['/userprofile'], { queryParams: { userName: username } });
           }
-        });
+        }
+      });
   }
 }
