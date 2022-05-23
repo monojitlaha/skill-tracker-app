@@ -21,6 +21,8 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { AlertComponent } from './components/alert/alert.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import { AlertComponent } from './components/alert/alert.component';
     MatInputModule,
     MatOptionModule,
     MatSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    MatToolbarModule
   ],
   providers: [ProfileService, LoginService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true } ],
