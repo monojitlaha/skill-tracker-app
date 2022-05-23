@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { DialogBoxComponent } from './dialog-box.component';
 
@@ -8,7 +10,14 @@ describe('DialogBoxComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DialogBoxComponent ]
+      imports: [
+        MatDialogModule,
+     ],
+      declarations: [ DialogBoxComponent ],
+      providers: [FormBuilder,
+          { provide: MAT_DIALOG_DATA, useValue: {} },
+          { provide: MatDialogRef, useValue: {} },
+       ]
     })
     .compileComponents();
   });
