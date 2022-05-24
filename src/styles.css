@@ -2,8 +2,10 @@
 
 body {
     width: 80%!important;
+    padding-top: 10px!important;
     padding-left: 200px!important;
     padding-right: 200px!important;
+    padding-bottom: 10px!important;
     display: flex;
     flex-direction: row;
 }
