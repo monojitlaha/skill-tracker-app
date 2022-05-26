@@ -11,13 +11,14 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class LoginComponent implements OnInit {
   loginCreds: any;
+  token:any = "";
   authData: LoginProfile;
   constructor(private router: Router, private loginService: LoginService) {
   }
 
   ngOnInit(): void {
   }
-
+  
   login(username: string, password: string): void {
 
     console.log("Username =" + username + ";" + "Password =" + password);

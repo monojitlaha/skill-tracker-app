@@ -23,7 +23,6 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { AlertComponent } from './components/alert/alert.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 
-
 @NgModule({
   declarations: [
     AppComponent,
