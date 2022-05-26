@@ -1,15 +1,37 @@
-<div>
-    <h1>Login Details</h1>
-    <div>
-        <label for="username">Username:</label>
-        <input #username id="username" type="text" placeholder="Enter User Name" />
-    </div>
-    <div>
-        <label for="password">Password:</label>
-        <input #password id="password" type="text" placeholder="Enter Password" />
-    </div>
-    <div>
-        <button type="button" (click)="login(username.value,password.value)">Submit</button>
-        <button type="button" (click)="username.value=' '; password.value=' ';">Reset</button>
+<br><br><br><br><br><br><br><br><br><br>
+<div class="container container-table">
+    <div class="row vertical-center-row">
+        <div class="text-center col-md-12 col-md-offset-12" >
+
+
+            <div >
+                <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login Details</h1>
+                <div>
+                    <label for="username">Username:</label>
+                    <input #username id="username" type="text" placeholder="Enter User Name" />
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input #password id="password" type="text" placeholder="Enter Password" />
+                </div>
+                <div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" (click)="login(username.value,password.value)" style="width:150px">Submit</button>
+                </div>
+                <div>
+                    
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" (click)="username.value=' '; password.value=' '; profiles = false;" style="width:150px">Reset</button>
+                </div>
+            </div>
+        
+            <div *ngIf="profiles" class="alert alert-danger">
+                <div>Invalid Credential</div>
+            </div>
+
+        </div>
     </div>
 </div>
+
+
+

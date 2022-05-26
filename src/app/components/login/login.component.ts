@@ -12,15 +12,19 @@ import { LoginService } from 'src/app/services/login.service';
 export class LoginComponent implements OnInit {
   loginCreds: any;
   token:any = "";
-  authData: LoginProfile;
-  constructor(private router: Router, private loginService: LoginService) {
+  authData:any;
+  profiles:boolean=false;
+  constructor(private router: Router, 
+    private loginService: LoginService) { 
+  
+
   }
 
   ngOnInit(): void {
   }
-  
-  login(username: string, password: string): void {
 
+  login(username: string, password: string): void {
+    
     console.log("Username =" + username + ";" + "Password =" + password);
     this.loginCreds = new LoginCreds(username, password);
     console.log(this.loginCreds);
@@ -28,6 +32,7 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.loginCreds)
       .subscribe((data) => {
         if (data) {
+          
           this.authData = data;
           console.log("Component Token =" + this.authData);
           localStorage.setItem('token', this.authData.token);
@@ -38,8 +43,14 @@ export class LoginComponent implements OnInit {
             } else {
               this.router.navigate(['/userprofile'], { queryParams: { userName: username } });
             }
+        
+
+    // setTimeout(() => {
+    //   this.router.navigate(['/profile']);
+    // }, 1000);
           }
         }
-      });
+      },
+      error=>{this.profiles = true});
   }
 }
