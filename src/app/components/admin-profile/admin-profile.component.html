@@ -1,0 +1,69 @@
+<h1>Administration Dashboard</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+        <div class="form-group col">
+            <label for="searchby">Search By:</label>
+            <select type="text" formControlName="searchby" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['searchby'].errors }">
+                <option *ngFor="let criteria of searchCriterias" [value]="criteria.value">{{criteria.viewValue}}
+                </option>
+            </select>
+            <div *ngIf="f['searchby'].touched && f['searchby'].errors" class="alert alert-danger">
+                <div *ngIf="f['searchby'].errors['required']">Please Select Search Criteria</div>
+            </div>
+        </div>
+        <div class="form-group col">
+            <label for="searchvalue">Search Value:</label>
+            <input type="text" formControlName="searchvalue" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['searchvalue'].errors }" />
+            <div *ngIf="f['searchvalue'].touched && f['searchvalue'].errors" class="alert alert-danger">
+                <div *ngIf="f['searchvalue'].errors['required']">Please Enter Search Value</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" [disabled]="form.invalid" class="btn btn-primary">
+            <span *ngIf="form.invalid" class="spinner-border spinner-border-sm mr-1"></span>
+            Search
+        </button>
+        <button (click)="onReset()" class="btn btn-warning float-right">
+            <span class="spinner-border spinner-border-sm mr-1"></span>
+            Cancel
+        </button>
+    </div>
+</form>
+<div class="profile-div" *ngFor="let profile of profiles">
+    <div class="div-content">
+        <div>
+            <span class="label-cls">Name:</span>
+            <span class="text-cls">{{profile.name}}</span>
+        </div>
+        <div>
+            <span class="label-cls">Associate Id:</span>
+            <span class="text-cls">{{profile.associateId}}</span>
+        </div>
+        <div>
+            <span class="label-cls">Email:</span>
+            <span class="text-cls">{{profile.email}}</span>
+        </div>
+        <div>
+            <span class="label-cls">Mobile:</span>
+            <span class="text-cls">{{profile.mobile}}</span>
+        </div>
+    </div>
+    <div class="div-content">
+        <div>
+            <app-grid-component #techGridComp [displayedColumns]="displayedColumns"
+                [dataSource]="profile.technicalSkills" [gridType]="''"
+                (afterCloseEvent)="techGridEventHandler($event)" [isButtonsVisible]="false"></app-grid-component>
+        </div>
+        <div>
+            <app-grid-component #commGridComp [displayedColumns]="displayedColumns"
+                [dataSource]="profile.communicationSkills" [gridType]="''"
+                (afterCloseEvent)="commGridEventHandler($event)" [isButtonsVisible]="false"></app-grid-component>
+        </div>
+    </div>
+</div>
+<div *ngIf="profiles == undefined || profiles.length == 0" class="alert alert-danger">
+    <div>No Recods Found</div>
+</div>

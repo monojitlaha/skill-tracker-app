@@ -1,23 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
 import { of } from 'rxjs';
 
-import { LoginComponent } from './login.component';
+import { AdminProfileComponent } from './admin-profile.component';
 
-describe('LoginComponent', () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
-  let mockRouter = {
-    navigate: jasmine.createSpy('navigate')
-  };
+describe('AdminProfileComponent', () => {
+  let component: AdminProfileComponent;
+  let fixture: ComponentFixture<AdminProfileComponent>;
   const httpClientSpy = jasmine.createSpyObj('HttpClient', ['post', 'get', 'put']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoginComponent ],
-      providers: [
-        { provide: Router, useValue: mockRouter },
+      declarations: [ AdminProfileComponent ],
+      providers: [FormBuilder,
         { provide: HttpClient, useValue: httpClientSpy }]
     })
     .compileComponents();
@@ -27,7 +23,7 @@ describe('LoginComponent', () => {
     httpClientSpy.post.and.returnValue(of({ status: 200, data: {} }));
     httpClientSpy.get.and.returnValue(of({ status: 200, data: {} }));
     httpClientSpy.put.and.returnValue(of({ status: 200, data: {} }));
-    fixture = TestBed.createComponent(LoginComponent);    
+    fixture = TestBed.createComponent(AdminProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

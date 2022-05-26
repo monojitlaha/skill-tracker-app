@@ -2,27 +2,23 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { LoginCreds } from '../models/login-creds.model';
-
-
+import { LoginCreds } from '../models/logincreds';
+import { environment } from '../../environments/environment';
+import { LoginProfile } from '../models/login-profile';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class LoginService {
-  
-   token:string = "";
 
   constructor(private http: HttpClient) { }
 
-  login(login: LoginCreds):Observable<any>{
-
-    return this.http.post(`http://localhost:35020/api/Authentication`, login, { responseType: 'text'})
-    .pipe(map(token => {
-      console.log('Token in Service = '+ token);
-      localStorage.setItem('token', token);      
-      return token;
-  }));
+  login(logincreds: LoginCreds): Observable<LoginProfile> {
+    return this.http.post<LoginProfile>(environment.authApiUrl + 'api/Authentication', logincreds)
+      .pipe(map(result => {
+        console.log('Auth Data:' + result);
+        return result;
+      }));
   }
 }

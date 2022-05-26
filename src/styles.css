@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+    width: 80%!important;
+    padding-top: 10px!important;
+    padding-left: 200px!important;
+    padding-right: 200px!important;
+    padding-bottom: 10px!important;
+    display: flex;
+    flex-direction: row;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-table {
+    margin-bottom: 10px;
+    width: 800px;
+    margin-top: 10px;
+}
+
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+    width: 30%;
+}
+
+.mat-flat-button.mat-primary {
+    margin-bottom: 5px;
+}

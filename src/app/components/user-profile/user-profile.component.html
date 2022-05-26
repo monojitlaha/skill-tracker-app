@@ -1,0 +1,71 @@
+<h1 *ngIf="isAddMode">Add Profile</h1>
+<h1 *ngIf="!isAddMode">Edit Profile</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+        <div class="form-group col">
+            <label for="name">Name:</label>
+            <input type="text" formControlName="name" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" />
+            <div *ngIf="f['name'].touched && f['name'].errors" class="alert alert-danger">
+                <div *ngIf="f['name'].errors['required']">Name is required</div>
+            </div>
+        </div>
+        <div class="form-group col">
+            <label for="associateId">Associate Id:</label>
+            <input type="text" formControlName="associateId" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['associateId'].errors }" />
+            <div *ngIf="f['associateId'].touched && f['associateId'].errors" class="alert alert-danger">
+                <div *ngIf="f['associateId'].errors['required']">Associate Id is required</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col">
+            <label for="email">Email:</label>
+            <input type="text" formControlName="email" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
+            <div *ngIf="f['email'].touched && f['email'].errors" class="alert alert-danger">
+                <div *ngIf="f['email'].errors['required']">Email is required</div>
+                <div *ngIf="f['email'].errors['email']">Invalid Email</div>
+            </div>
+        </div>
+        <div class="form-group col">
+            <label for="mobile">Mobile:</label>
+            <input type="text" formControlName="mobile" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['mobile'].errors }" />
+            <div *ngIf="f['mobile'].touched && f['mobile'].errors" class="alert alert-danger">
+                <div *ngIf="f['mobile'].errors['required']">Mobile is required</div>
+                <div *ngIf="f['mobile'].errors['minlength'] || f['mobile'].errors['maxlength']">Mobile should be 10
+                    digits</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-group col">
+            <app-grid-component #techGridComp [displayedColumns]="displayedColumns" [dataSource]="technicalSkills"
+                [gridType]="'Technical'" (afterCloseEvent)="techGridEventHandler($event)"
+                [isButtonsVisible]="true"></app-grid-component>
+                <div *ngIf="!isTechnicalSkillsValid" class="alert alert-danger">
+                    <div>Please select atleast 1 Technical Skill</div>
+                </div>
+        </div>
+        <div class="form-group col">
+            <app-grid-component #commGridComp [displayedColumns]="displayedColumns" [dataSource]="communicationSkills"
+                [gridType]="'Communication'" (afterCloseEvent)="commGridEventHandler($event)"
+                [isButtonsVisible]="true"></app-grid-component>
+                <div *ngIf="!isCommunicationSkillsValid" class="alert alert-danger">
+                    <div>Please select atleast 1 Communication Skill</div>
+                </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" [disabled]="form.invalid" class="btn btn-primary">
+            <span *ngIf="form.invalid" class="spinner-border spinner-border-sm mr-1"></span>
+            Save
+        </button>
+        <button (click)="onReset()" class="btn btn-warning float-right">
+            <span class="spinner-border spinner-border-sm mr-1"></span>
+            Cancel
+        </button>
+    </div>
+</form>
