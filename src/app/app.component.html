@@ -1,11 +1,15 @@
-
-
-<mat-toolbar>
-<mat-toolbar-row color="themeColor">
-    <span>Tool Bar</span>
-    <span class="example-spacer"></span>
-    
-  </mat-toolbar-row>
-</mat-toolbar>
-
+<div class="divClass">
+  <mat-toolbar>
+  <mat-toolbar-row color="themeColor">
+      <span >Skill Tracker</span>
+      <span class="example-fill-remaining-space"></span>
+      <span fxShow="true" fxHide.lt-md="true" *ngIf="isShown">
+  
+        <a href="#" mat-button (click)="logout()">Logout</a>
+      </span>
+      
+      
+    </mat-toolbar-row>
+  </mat-toolbar>
+  </div>
 <router-outlet></router-outlet>
