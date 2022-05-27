@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
           console.log("Component Token =" + this.authData);
           localStorage.setItem('token', this.authData.token);
           localStorage.setItem('role', this.authData.role);
+          localStorage.setItem('username', username);
           if (this.authData && this.authData.role) {
             if (this.authData.role.toLowerCase() === 'admin') {
               this.router.navigate(['/adminprofile']);
