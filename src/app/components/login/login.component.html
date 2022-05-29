@@ -1,4 +1,5 @@
 <br><br><br><br><br><br><br><br><br><br>
+<span class="min-height:2000px">
 <div class="container container-table">
     <div class="row vertical-center-row">
         <div class="text-center col-md-12 col-md-offset-12" >
@@ -12,26 +13,28 @@
                 </div>
                 <div>
                     <label for="password">Password:</label>
-                    <input #password id="password" type="text" placeholder="Enter Password" />
+                    <input #password id="password" type="text" placeholder="Enter Password" type="password"/>
                 </div>
+                <br>
                 <div>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <button type="button" (click)="login(username.value,password.value)" style="width:150px">Submit</button>
                 </div>
+                <br/>
                 <div>
                     
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <button type="button" (click)="username.value=' '; password.value=' '; profiles = false;" style="width:150px">Reset</button>
                 </div>
             </div>
-        
+            <br>
             <div *ngIf="profiles" class="alert alert-danger">
-                <div>Invalid Credential</div>
+                <div>Invalid Credentials</div>
             </div>
 
         </div>
     </div>
 </div>
-
-
+</span>
+<br><br><br><br><br><br><br>
 
