@@ -15,22 +15,22 @@ export class ProfileService {
   constructor(private http: HttpClient) { }
 
   getProfiles(): Observable<any> {
-    return this.http.get(environment.baseApiUrl + 'admin/profile/search', httpOptions);
+    return this.http.get(environment.baseApiUrl + 'Admin', httpOptions);
   }
 
   getProfileByCriteria(key:string, value:string): Observable<any> {
-    return this.http.get(environment.baseApiUrl + 'admin/profile/search/' + key +'/' + value, httpOptions);
+    return this.http.get(environment.baseApiUrl + 'Admin/' + key +'/' + value, httpOptions);
   }
 
   createProfile(profile:Profile): Observable<any> {
     const body=JSON.stringify(profile);
     console.log(body)
-    return this.http.post(environment.baseApiUrl + 'engineer/profile/create', body, httpOptions);
+    return this.http.post(environment.baseApiUrl + 'Engineer', body, httpOptions);
   }
 
   updateProfile(id:string, profile:Profile): Observable<any> {
     const body=JSON.stringify(profile);
     console.log(body)
-    return this.http.put(environment.baseApiUrl + 'engineer/profile/update/' + id, body, httpOptions);
+    return this.http.put(environment.baseApiUrl + 'Engineer/' + id, body, httpOptions);
   }
 }

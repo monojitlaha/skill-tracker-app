@@ -15,7 +15,7 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   login(logincreds: LoginCreds): Observable<LoginProfile> {
-    return this.http.post<LoginProfile>(environment.authApiUrl + 'api/Authentication', logincreds)
+    return this.http.post<LoginProfile>(environment.authApiUrl + 'Authentication', logincreds)
       .pipe(map(result => {
         console.log('Auth Data:' + result);
         return result;
