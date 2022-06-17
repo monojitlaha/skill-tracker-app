@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  baseApiUrl: 'http://localhost:9020/',
-  authApiUrl: 'http://localhost:35020/'
+  baseApiUrl: 'https://08yox7kth9.execute-api.us-east-1.amazonaws.com/dev/api/profiles/',
+  authApiUrl: 'https://08yox7kth9.execute-api.us-east-1.amazonaws.com/dev/api/auth/'
 };
 
 /*
